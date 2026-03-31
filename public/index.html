@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterviewMate AI – Communication & Interview Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ===== APP WRAPPER ===== -->
+  <div class="app-wrapper">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🎯</span>
+          <div>
+            <h1 class="logo-title">InterviewMate</h1>
+            <p class="logo-sub">AI Trainer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode Selection -->
+      <nav class="mode-nav">
+        <p class="nav-label">Choose Your Mode</p>
+
+        <button class="mode-btn active" data-mode="interview">
+          <span class="mode-icon">💼</span>
+          <div class="mode-info">
+            <span class="mode-name">Interview Practice</span>
+            <span class="mode-desc">Mock Q&amp;A + feedback</span>
+          </div>
+        </button>
+
+        <button class="mode-btn" data-mode="english">
+          <span class="mode-icon">💬</span>
+          <div class="mode-info">
+            <span class="mode-name">English Practice</span>
+            <span class="mode-desc">Grammar + conversation</span>
+          </div>
+        </button>
+
+        <button class="mode-btn" data-mode="vocabulary">
+          <span class="mode-icon">📖</span>
+          <div class="mode-info">
+            <span class="mode-name">Vocabulary Builder</span>
+            <span class="mode-desc">Words + meanings + examples</span>
+          </div>
+        </button>
+      </nav>
+
+      <!-- Current Mode Info Card -->
+      <div class="mode-card" id="modeCard">
+        <p class="mode-card-title" id="modeCardTitle">💼 Interview Mode</p>
+        <p class="mode-card-text" id="modeCardText">
+          Practice answering interview questions. I'll give you feedback on grammar, clarity, and confidence!
+        </p>
+      </div>
+
+      <!-- Tips Section -->
+      <div class="tips-section">
+        <p class="nav-label">Quick Tips</p>
+        <div class="tip" id="tipText">
+          💡 Don't worry about mistakes – that's how you learn!
+        </div>
+      </div>
+
+      <!-- Clear Chat Button -->
+      <button class="clear-btn" id="clearBtn">
+        🗑️ Clear Conversation
+      </button>
+    </aside>
+
+    <!-- ===== MAIN CHAT AREA ===== -->
+    <main class="chat-main">
+
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <div class="chat-header-left">
+          <div class="status-dot"></div>
+          <span class="header-mode-badge" id="headerModeBadge">💼 Interview Mode</span>
+        </div>
+        <div class="chat-header-right">
+          <span class="header-hint">Powered by LLaMA3 × Groq</span>
+        </div>
+      </header>
+
+      <!-- Messages Area -->
+      <div class="chat-messages" id="chatMessages">
+
+        <!-- Welcome Message (shown on load) -->
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-emoji">🎯</div>
+          <h2 class="welcome-title">Welcome to InterviewMate AI!</h2>
+          <p class="welcome-text">
+            I'm your personal AI trainer for English communication and interview preparation.
+            Select a mode on the left and start practicing!
+          </p>
+          <div class="welcome-modes">
+            <div class="welcome-mode-card" onclick="selectModeAndStart('interview')">
+              <span>💼</span>
+              <strong>Interview Practice</strong>
+              <small>Answer mock interview questions</small>
+            </div>
+            <div class="welcome-mode-card" onclick="selectModeAndStart('english')">
+              <span>💬</span>
+              <strong>English Practice</strong>
+              <small>Improve your grammar &amp; speaking</small>
+            </div>
+            <div class="welcome-mode-card" onclick="selectModeAndStart('vocabulary')">
+              <span>📖</span>
+              <strong>Vocabulary Builder</strong>
+              <small>Learn new words every day</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Typing Indicator (hidden by default) -->
+      <div class="typing-indicator" id="typingIndicator" style="display: none;">
+        <div class="typing-bubble">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <span class="typing-text">InterviewMate is thinking...</span>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="userInput"
+            class="chat-input"
+            placeholder="Type your message here... (Press Enter to send)"
+            rows="1"
+            maxlength="500"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="input-hint">
+          <span id="charCount">0</span>/500 characters &nbsp;|&nbsp; Press <kbd>Enter</kbd> to send, <kbd>Shift+Enter</kbd> for new line
+        </p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
